@@ -1,0 +1,281 @@
+This project folder (Agentic Inference Optimizer) is a Python starter framework for benchmarking, diagnosing, and safely tuning LLM inference on an NVIDIA GPU host (targeted at vLLM on Ubuntu/H100).
+
+What It Includes
+
+  
+Benchmarking (benchmark/):
+  
+  
+
+  
+Async OpenAI-compatible streaming client (engine_adapter.py) and bounded-concurrency runner with warmup and repeated trials (runner.py, run_cli.py).
+
+  
+Computes TTFT, TPOT (using server-provided token usage rather than SSE chunk counts), request latency percentiles, output tokens/sec, and error rate (metrics.py).
+
+  
+GPU inspection via nvidia-smi (gpu_info.py).
+
+  
+
+  
+GPU Profiling (profiling/):
+  
+  
+
+  
+nvidia-smi telemetry collection (gpu_telemetry.py) and wrappers for NVIDIA Nsight Systems (nsys_capture.py) and Nsight Compute (ncu_capture.py).
+
+  
+
+  
+Diagnosis & Optimization (agents/, optimizer/, orchestration/):
+  
+  
+
+  
+Evidence-labelled heuristic bottleneck diagnosis (diagnosis_agent.py).
+
+  
+Pydantic allow-list for safe candidate vLLM settings (constraints.py), candidate search (search.py), comparison (compare.py), and orchestration (controller.py).
+
+  
+
+  
+Control Plane API & Persistence (api/, configs/):
+  
+  
+
+  
+FastAPI service (main.py) exposing /health, /v1/system/gpus, and /v1/benchmarks endpoints with atomic local JSON result persistence.
+
+  
+
+  
+Unit Tests (tests/):
+  
+  
+
+  
+Pytest suites covering constraints, diagnosis, and metrics (test_constraints.py, test_diagnosis.py, test_metrics.py).
+
+  
+
+  
+
+For setup, CLI usage, and metric caveats, see README.md.
+
+DEBUG THE CODE
+
+I audited the codebase and fixed several bugs:
+
+Fixes Applied
+
+  
+Background task GC risk, path traversal, and event-loop blocking in api/main.py:
+  
+  
+
+  
+Stored asyncio.create_task(...) references in background_tasks with a done callback so long-running benchmark tasks cannot be garbage-collected mid-execution.
+
+  
+Validated run_id as a UUID in get_benchmark (api/main.py) to prevent path traversal outside results_dir.
+
+  
+Offloaded synchronous snapshot() (nvidia-smi subprocess) to asyncio.to_thread(snapshot) in gpu_status.
+
+  
+
+  
+Event-loop blocking in orchestration in orchestration/controller.py:
+  
+  
+
+  
+Offloaded snapshot() to asyncio.to_thread(snapshot) inside execute.
+
+  
+
+  
+Misleading 0.0 throughput when usage metadata is missing in benchmark/metrics.py:
+  
+  
+
+  
+Set completion_tokens and output_tokens_per_second to None when token_usage_available is False, matching the contract in README.md.
+
+  
+
+  
+Threshold boundary gap in agents/diagnosis_agent.py:
+  
+  
+
+  
+Changed tpot < 0.08 to tpot <= 0.08 so tpot == 0.08 with ttft > 2.0 is not skipped.
+
+  
+
+  
+Verification
+
+  
+python3 -m compileall -q . passed across all Python files.
+
+  
+Ran test_percentile, test_summary_counts_failures (tests/test_metrics.py), and test_diagnosis_is_heuristic (tests/test_diagnosis.py) directly via python3: all 3 passed.
+
+  
+Not run: pytest and tests/test_constraints.py could not run because pytest, pydantic, fastapi, httpx, and the rest of requirements.txt are not installed in /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 (and no .venv exists yet).
+
+  
+Remaining Notes
+
+  
+In benchmark/schemas.py, check_concurrency checks self.warmup + self.requests < self.concurrency rather than self.requests < self.concurrency, even though warmup and trial batches run separately.
+
+  
+In optimizer/compare.py, improved uses cp < bp or ct > bt, which flags a candidate as improved even if one metric regresses while the other improves.
+
+  
+
+To run the full test suite locally, create a virtual environment and install requirements.txt:
+
+bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pytest -v
+(.venv) (base) pramm@Prams-MacBook-Air agentic-inference-optimizer 2 % pytest -v
+================================================= test session starts ==================================================
+platform darwin -- Python 3.9.12, pytest-7.1.2, pluggy-1.0.0 -- /opt/anaconda3/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/pramm/Downloads/agentic-inference-optimizer 2
+plugins: anyio-4.12.1, Faker-30.6.0
+collected 0 items / 3 errors                                                                                           
+
+======================================================== ERRORS ========================================================
+______________________________________ ERROR collecting tests/test_constraints.py ______________________________________
+ImportError while importing test module '/Users/pramm/Downloads/agentic-inference-optimizer 2/tests/test_constraints.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/anaconda3/lib/python3.9/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_constraints.py:3: in <module>
+    from optimizer.constraints import validate_candidate
+E   ModuleNotFoundError: No module named 'optimizer'
+_______________________________________ ERROR collecting tests/test_diagnosis.py _______________________________________
+ImportError while importing test module '/Users/pramm/Downloads/agentic-inference-optimizer 2/tests/test_diagnosis.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/anaconda3/lib/python3.9/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_diagnosis.py:1: in <module>
+    from agents.diagnosis_agent import diagnose
+E   ModuleNotFoundError: No module named 'agents'
+________________________________________ ERROR collecting tests/test_metrics.py ________________________________________
+ImportError while importing test module '/Users/pramm/Downloads/agentic-inference-optimizer 2/tests/test_metrics.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/anaconda3/lib/python3.9/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_metrics.py:1: in <module>
+    from benchmark.metrics import percentile, summarize
+E   ModuleNotFoundError: No module named 'benchmark'
+=============================================== short test summary info ================================================
+ERROR tests/test_constraints.py
+ERROR tests/test_diagnosis.py
+ERROR tests/test_metrics.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+================================================== 3 errors in 1.04s ===================================================
+(.venv) (base) pramm@Prams-MacBook-Air agentic-inference-optimizer 2 % 
+
+Two things caused that error:
+
+
+  
+Missing pythonpath in pytest config: Running pytest directly does not add the project root to sys.path, so optimizer, agents, and benchmark could not be imported.
+  
+  
+
+  
+Fix: Added pyproject.toml with pythonpath = ["."].
+
+  
+
+  
+Wrong pytest binary in your shell: Your output shows /opt/anaconda3/bin/python (Python 3.9.12, pytest-7.1.2) ran instead of .venv/bin/pytest (Python 3.13.2, pytest-8.4.2), either because zsh cached the old path or conda (base) took precedence.
+
+  
+Verification
+
+Ran .venv/bin/pytest -v:
+
+
+  
+5 passed (tests/test_constraints.py, tests/test_diagnosis.py, tests/test_metrics.py) in 0.51s.
+
+  
+
+In your terminal, refresh the shell path cache (or deactivate conda) before running pytest -v:
+
+bash
+rehash
+pytest -v
+
+(Or invoke .venv/bin/pytest -v directly.)
+
+WHAT NEXT HOW TO SEE THE RESULTS
+
+Right now results/ is empty because no benchmark has been run yet. Here is how to run one and view the results:
+
+1. Configure .env
+
+Copy .env.example to .env and point it at a running vLLM (or OpenAI-compatible) server:
+
+bash
+cp .env.example .env
+
+Edit .env to set VLLM_BASE_URL, VLLM_MODEL, and VLLM_API_KEY.
+(Note: Since you're on a MacBook Air without an NVIDIA GPU, nvidia-smi telemetry will simply record an error string inside the diagnosis block rather than failing the benchmark, as long as VLLM_BASE_URL points to a reachable inference server.)
+
+2. Run a Benchmark & See Results
+Option A: CLI (benchmark/run_cli.py)
+
+Runs the benchmark and prints run_id, aggregate metrics, and diagnosis directly to your terminal:
+
+bash
+set -a && source .env && set +a
+.venv/bin/python -m benchmark.run_cli --requests 40 --concurrency 4 --input-tokens 256 --output-tokens 128 --warmup 4 --trials 3
+Option B: FastAPI Control Plane (api/main.py)
+
+Start the API server:
+
+bash
+set -a && source .env && set +a
+.venv/bin/uvicorn api.main:app --host 127.0.0.1 --port 8080
+
+Then either open http://127.0.0.1:8080/docs in your browser (interactive Swagger UI) or use curl:
+
+bash
+# 1. Start a run (returns {"run_id": "...", "status": "queued"})
+curl -s http://127.0.0.1:8080/v1/benchmarks \
+  -H 'content-type: application/json' \
+  -d '{"requests":40,"concurrency":4,"input_tokens":256,"output_tokens":128,"warmup":4,"trials":2}'
+# 2. List all runs in memory
+curl -s http://127.0.0.1:8080/v1/benchmarks
+# 3. View full results for a run_id
+curl -s http://127.0.0.1:8080/v1/benchmarks/<RUN_ID>
+3. Saved Result Files on Disk
+
+Every completed run (whether from the CLI or API) is saved by orchestration/controller.py in results/:
+
+
+  
+results/<run_id>.json — full output (workload, warmup, per-trial stats, aggregate percentiles/throughput, raw per-request samples, and heuristic diagnosis).
+
+  
+results/runs.jsonl — one-line-per-run summary log (run_id + aggregate) for comparing runs over time.
+
+  
