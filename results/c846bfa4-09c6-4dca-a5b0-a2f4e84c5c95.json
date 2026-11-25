@@ -1,0 +1,343 @@
+{
+  "run_id": "c846bfa4-09c6-4dca-a5b0-a2f4e84c5c95",
+  "workload": {
+    "requests": 10,
+    "concurrency": 2,
+    "input_tokens": 64,
+    "output_tokens": 16,
+    "warmup": 2,
+    "trials": 2,
+    "temperature": 0.0
+  },
+  "warmup": {
+    "requests_total": 2,
+    "requests_succeeded": 2,
+    "requests_failed": 0,
+    "error_rate": 0.0,
+    "wall_seconds": 0.16003654099768028,
+    "request_latency_s": {
+      "p50": 0.14775104199361522,
+      "p95": 0.1583000544967945,
+      "p99": 0.15923774449707706
+    },
+    "ttft_s": {
+      "p50": 0.062431083497358486,
+      "p95": 0.07307872115343343,
+      "p99": 0.07402517783397343
+    },
+    "tpot_s": {
+      "p50": 0.005687997233083782,
+      "p95": 0.005694572243276828,
+      "p99": 0.005695156688627321
+    },
+    "completion_tokens": 32,
+    "output_tokens_per_second": 199.95433418211556,
+    "token_usage_available": true
+  },
+  "trials": [
+    {
+      "requests_total": 10,
+      "requests_succeeded": 10,
+      "requests_failed": 0,
+      "error_rate": 0.0,
+      "wall_seconds": 0.6477736660162918,
+      "request_latency_s": {
+        "p50": 0.12814429099671543,
+        "p95": 0.14132747485855363,
+        "p99": 0.14132969498372405
+      },
+      "ttft_s": {
+        "p50": 0.03980297899397556,
+        "p95": 0.04138310608104803,
+        "p99": 0.0416405212006066
+      },
+      "tpot_s": {
+        "p50": 0.005829165266671528,
+        "p95": 0.006790561123537675,
+        "p99": 0.006806621131506593
+      },
+      "completion_tokens": 160,
+      "output_tokens_per_second": 246.99985256266334,
+      "token_usage_available": true,
+      "trial": 1
+    },
+    {
+      "requests_total": 10,
+      "requests_succeeded": 10,
+      "requests_failed": 0,
+      "error_rate": 0.0,
+      "wall_seconds": 0.6449607500107959,
+      "request_latency_s": {
+        "p50": 0.12839472948689945,
+        "p95": 0.13100755814957665,
+        "p99": 0.13198057803238045
+      },
+      "ttft_s": {
+        "p50": 0.04057314549572766,
+        "p95": 0.042020037489419335,
+        "p99": 0.042175107486255005
+      },
+      "tpot_s": {
+        "p50": 0.005833545833593234,
+        "p95": 0.006021979146656425,
+        "p99": 0.006093069162471996
+      },
+      "completion_tokens": 160,
+      "output_tokens_per_second": 248.07711166504595,
+      "token_usage_available": true,
+      "trial": 2
+    }
+  ],
+  "aggregate": {
+    "requests_total": 20,
+    "requests_succeeded": 20,
+    "requests_failed": 0,
+    "error_rate": 0.0,
+    "wall_seconds": 1.2927344160270877,
+    "request_latency_s": {
+      "p50": 0.12839302049542312,
+      "p95": 0.14132439135137248,
+      "p99": 0.1413290782822878
+    },
+    "ttft_s": {
+      "p50": 0.04019339599472005,
+      "p95": 0.041804662493814246,
+      "p99": 0.042132032487133986
+    },
+    "tpot_s": {
+      "p50": 0.005833545833593234,
+      "p95": 0.00676825555691418,
+      "p99": 0.006802160018181893
+    },
+    "completion_tokens": 320,
+    "output_tokens_per_second": 247.53731008681893,
+    "token_usage_available": true
+  },
+  "samples": [
+    {
+      "ok": true,
+      "latency_s": 0.12488862499594688,
+      "ttft_s": 0.039772249991074204,
+      "tpot_s": 0.0056744250003248455,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "ef05419c-4018-4193-bcae-f62e96500eaf",
+      "index": 0
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12530108299688436,
+      "ttft_s": 0.039375916006974876,
+      "tpot_s": 0.0057283444659939654,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "5538d157-f06a-4585-99f7-42d35a832d20",
+      "index": 1
+    },
+    {
+      "ok": true,
+      "latency_s": 0.14132408300065435,
+      "ttft_s": 0.03983370799687691,
+      "tpot_s": 0.00676602500025183,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "92b35ae0-9ab2-4ef4-be6a-1afd1f030c6a",
+      "index": 2
+    },
+    {
+      "ok": true,
+      "latency_s": 0.14133025001501665,
+      "ttft_s": 0.039170708012534305,
+      "tpot_s": 0.006810636133498822,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "31f0eb0c-8a93-49d0-84da-fcbb530bb7e4",
+      "index": 3
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12167829199461266,
+      "ttft_s": 0.036986208986490965,
+      "tpot_s": 0.005646138867208114,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "e2a0f99c-b320-4eaf-be0a-4dc2fe611dc1",
+      "index": 4
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12230316700879484,
+      "ttft_s": 0.03860162501223385,
+      "tpot_s": 0.005580102799770733,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "b1ff377e-ac3d-4b40-ad57-f3b5bd8344dc",
+      "index": 5
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1277566659846343,
+      "ttft_s": 0.04098983298172243,
+      "tpot_s": 0.005784455533527458,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "51a4d9d5-2b50-4e4b-a372-a1d399a18c57",
+      "index": 6
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1287336669920478,
+      "ttft_s": 0.039955749991349876,
+      "tpot_s": 0.005918527800046528,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "3d0a79b9-ba94-4675-a1dd-0ff829331aee",
+      "index": 7
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12981299997773021,
+      "ttft_s": 0.04170487498049624,
+      "tpot_s": 0.005873874999815598,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "e4c46109-90d1-4e26-b787-24b4075f3845",
+      "index": 8
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12853191600879654,
+      "ttft_s": 0.039920125011121854,
+      "tpot_s": 0.005907452733178313,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "8d6be05f-5827-4237-a9b1-f8632db37650",
+      "index": 9
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1291315830021631,
+      "ttft_s": 0.04043104199809022,
+      "tpot_s": 0.005913369400271525,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "cab1b414-e856-4ada-a9dc-3029b3d2eb38",
+      "index": 0
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12692249999963678,
+      "ttft_s": 0.03970554200350307,
+      "tpot_s": 0.005814463866408914,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "430f8e0b-bd26-40fa-955d-b28da06ded8b",
+      "index": 1
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12765608300105669,
+      "ttft_s": 0.04170241599786095,
+      "tpot_s": 0.005730244466879715,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "d2a2d759-a20a-4728-aeec-b5bb222c546b",
+      "index": 2
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12780704101896845,
+      "ttft_s": 0.04046970800845884,
+      "tpot_s": 0.005822488867367307,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "a392f5e3-b6ba-4919-8556-34314a37e76b",
+      "index": 3
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1295209999952931,
+      "ttft_s": 0.0416201249754522,
+      "tpot_s": 0.005860058334656059,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "f12d939a-4c82-43eb-82e3-c6166b6650b9",
+      "index": 4
+    },
+    {
+      "ok": true,
+      "latency_s": 0.13222383300308138,
+      "ttft_s": 0.04056120800669305,
+      "tpot_s": 0.006110841666425889,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "630e8886-a1fa-4c56-afa3-25d74c281caf",
+      "index": 5
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1285353339917492,
+      "ttft_s": 0.04221387498546392,
+      "tpot_s": 0.005754763933752353,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "bd1521b9-4d01-40d6-af24-e6bd40cb5ca7",
+      "index": 6
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12635454200790264,
+      "ttft_s": 0.03858408299856819,
+      "tpot_s": 0.00585136393395563,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "35bf99b1-50e1-473e-ba51-3992fedd09db",
+      "index": 7
+    },
+    {
+      "ok": true,
+      "latency_s": 0.12906345800729468,
+      "ttft_s": 0.04178312499425374,
+      "tpot_s": 0.005818688867536063,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "7619e610-7d41-434c-919b-55cd3f49e4d0",
+      "index": 8
+    },
+    {
+      "ok": true,
+      "latency_s": 0.1282541249820497,
+      "ttft_s": 0.040585082984762266,
+      "tpot_s": 0.005844602799819161,
+      "prompt_tokens": 80,
+      "completion_tokens": 16,
+      "request_id": "04d5afc3-f577-4c4b-941f-5ea3ef9fa8a5",
+      "index": 9
+    }
+  ],
+  "notes": [
+    "Closed-loop concurrency, not open-loop arrival-rate testing.",
+    "Prompt length is approximate unless a tokenizer-backed corpus is supplied.",
+    "TTFT is first non-empty text delta; SSE chunks are not treated as tokens.",
+    "Token throughput and TPOT require server-provided usage metadata."
+  ],
+  "diagnosis": {
+    "type": "heuristic_hypotheses_not_ground_truth",
+    "hypotheses": [
+      {
+        "category": "insufficient_evidence",
+        "confidence": "low",
+        "reason": "No configured heuristic fired.",
+        "next_step": "Repeat trials and correlate request metrics with engine metrics and Nsight."
+      }
+    ],
+    "gpu_telemetry": {
+      "error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+    },
+    "limitations": [
+      "A single GPU utilization snapshot cannot establish a bottleneck.",
+      "TTFT includes network, queueing, scheduling, and prefill.",
+      "Confirm hypotheses with engine metrics and targeted Nsight captures."
+    ]
+  }
+}

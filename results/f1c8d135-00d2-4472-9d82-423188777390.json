@@ -1,0 +1,283 @@
+{
+  "run_id": "f1c8d135-00d2-4472-9d82-423188777390",
+  "workload": {
+    "requests": 10,
+    "concurrency": 2,
+    "input_tokens": 64,
+    "output_tokens": 16,
+    "warmup": 2,
+    "trials": 2,
+    "temperature": 0.0
+  },
+  "warmup": {
+    "requests_total": 2,
+    "requests_succeeded": 0,
+    "requests_failed": 2,
+    "error_rate": 1.0,
+    "wall_seconds": 0.02442829101346433,
+    "request_latency_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "ttft_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "tpot_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "completion_tokens": null,
+    "output_tokens_per_second": null,
+    "token_usage_available": false
+  },
+  "trials": [
+    {
+      "requests_total": 10,
+      "requests_succeeded": 0,
+      "requests_failed": 10,
+      "error_rate": 1.0,
+      "wall_seconds": 0.012856291024945676,
+      "request_latency_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "ttft_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "tpot_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "completion_tokens": null,
+      "output_tokens_per_second": null,
+      "token_usage_available": false,
+      "trial": 1
+    },
+    {
+      "requests_total": 10,
+      "requests_succeeded": 0,
+      "requests_failed": 10,
+      "error_rate": 1.0,
+      "wall_seconds": 0.007779000006848946,
+      "request_latency_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "ttft_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "tpot_s": {
+        "p50": null,
+        "p95": null,
+        "p99": null
+      },
+      "completion_tokens": null,
+      "output_tokens_per_second": null,
+      "token_usage_available": false,
+      "trial": 2
+    }
+  ],
+  "aggregate": {
+    "requests_total": 20,
+    "requests_succeeded": 0,
+    "requests_failed": 20,
+    "error_rate": 1.0,
+    "wall_seconds": 0.020635291031794623,
+    "request_latency_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "ttft_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "tpot_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "completion_tokens": null,
+    "output_tokens_per_second": null,
+    "token_usage_available": false
+  },
+  "samples": [
+    {
+      "ok": false,
+      "request_id": "279c9ceb-1367-4197-82da-fb5979d724ac",
+      "index": 0,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "48b712e1-dfce-409a-9b29-11f62ec95f72",
+      "index": 1,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "33b5711f-d798-4f8d-89a9-e2010ab3267d",
+      "index": 2,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "707bce10-bf7c-4422-b6c7-6897d9ca5a14",
+      "index": 3,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "6ca2d220-bf0d-4137-a5fb-a18fdf053007",
+      "index": 4,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "76f4bdd8-b9c7-4d72-abcc-6aaba5147870",
+      "index": 5,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "3ae1e677-bb36-4657-b5ad-8a6b7d531276",
+      "index": 6,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "fc692936-53e4-4bc4-9e50-c86ae7b55866",
+      "index": 7,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "84321911-bf5a-4524-8364-9f831f0a3282",
+      "index": 8,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "4975c8f7-82ca-4b70-a92f-441f1a483fa0",
+      "index": 9,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "7450ea17-77e3-4060-ae7b-de4a11e9666d",
+      "index": 0,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "2ef8359c-fafe-44bf-aa61-6f3254e75ea7",
+      "index": 1,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "0f285fb6-afb3-4fc2-9732-75ddc3a8202b",
+      "index": 2,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "dd1348b4-fb03-46d0-98e2-c10d28a0e555",
+      "index": 3,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "1fb59f11-b088-4441-b14a-0b42a754b312",
+      "index": 4,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "c21a7db4-af49-4810-b240-bfd31fe64d62",
+      "index": 5,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "6cc3af73-09e6-4b87-a607-18e291a670e0",
+      "index": 6,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "a41a0621-23ca-4f69-8e05-0df41c860f12",
+      "index": 7,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "ebe452ee-8276-4d78-904c-f0f9fed762f1",
+      "index": 8,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    },
+    {
+      "ok": false,
+      "request_id": "c0afa519-6c53-4c08-b26e-d3dbb8c5add3",
+      "index": 9,
+      "error_type": "ConnectError",
+      "error": "All connection attempts failed"
+    }
+  ],
+  "notes": [
+    "Closed-loop concurrency, not open-loop arrival-rate testing.",
+    "Prompt length is approximate unless a tokenizer-backed corpus is supplied.",
+    "TTFT is first non-empty text delta; SSE chunks are not treated as tokens.",
+    "Token throughput and TPOT require server-provided usage metadata."
+  ],
+  "diagnosis": {
+    "type": "heuristic_hypotheses_not_ground_truth",
+    "hypotheses": [
+      {
+        "category": "reliability_or_overload",
+        "confidence": "medium",
+        "reason": "Observed error rate 100.00% exceeds 1%.",
+        "next_step": "Inspect engine logs, queueing, timeout policy, and offered load."
+      }
+    ],
+    "gpu_telemetry": {
+      "error": "[Errno 2] No such file or directory: 'nvidia-smi'"
+    },
+    "limitations": [
+      "A single GPU utilization snapshot cannot establish a bottleneck.",
+      "TTFT includes network, queueing, scheduling, and prefill.",
+      "Confirm hypotheses with engine metrics and targeted Nsight captures."
+    ]
+  }
+}
