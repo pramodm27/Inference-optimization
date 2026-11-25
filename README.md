@@ -70,18 +70,20 @@ uvicorn api.main:app --host 127.0.0.1 --port 8080
 pytest -q
 ```
 
-API endpoints:
-- `GET /health`
-- `GET /v1/system/gpus`
-- `POST /v1/benchmarks`
-- `GET /v1/benchmarks/{run_id}`
-- `GET /v1/benchmarks`
+API endpoints (authenticated with `X-API-Key` or `Authorization: Bearer <token>` when `API_AUTH_ENABLED=true`):
+- `GET /health` (public liveness)
+- `GET /ready` (public storage readiness)
+- `GET /v1/system/gpus` (`viewer`+)
+- `POST /v1/benchmarks` (`operator`+, supports `mode: "closed_loop" | "open_loop"`, `arrival_rate_rps`, and `prompt_corpus_path`)
+- `GET /v1/benchmarks/{run_id}` (`viewer`+)
+- `GET /v1/benchmarks` (`viewer`+)
 
 Example:
 ```bash
 curl -s http://127.0.0.1:8080/v1/benchmarks \
   -H 'content-type: application/json' \
-  -d '{"requests":40,"concurrency":4,"input_tokens":256,"output_tokens":128,"warmup":4,"trials":2}'
+  -H 'x-api-key: dev-admin-key' \
+  -d '{"requests":40,"concurrency":4,"input_tokens":256,"output_tokens":128,"warmup":4,"trials":2,"mode":"open_loop","arrival_rate_rps":10.0}'
 ```
 
 ## Metric definitions and limitations

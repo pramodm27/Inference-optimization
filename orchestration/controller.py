@@ -1,16 +1,24 @@
-import asyncio, json, os
+import asyncio
+import json
+import os
 from pathlib import Path
+from typing import Optional
 from benchmark.config import get_settings
 from benchmark.engine_adapter import VLLMOpenAIAdapter
 from benchmark.runner import run_benchmark
 from profiling.gpu_telemetry import snapshot
 from agents.diagnosis_agent import diagnose
 
-async def execute(request):
+
+async def execute(request, run_id: Optional[str] = None):
     settings = get_settings()
-    adapter = VLLMOpenAIAdapter(settings.vllm_base_url, settings.vllm_model,
-                                settings.vllm_api_key, settings.benchmark_timeout_seconds)
-    result = await run_benchmark(adapter, request)
+    adapter = VLLMOpenAIAdapter(
+        settings.vllm_base_url,
+        settings.vllm_model,
+        settings.vllm_api_key,
+        settings.benchmark_timeout_seconds,
+    )
+    result = await run_benchmark(adapter, request, run_id=run_id)
     try:
         telemetry = await asyncio.to_thread(snapshot)
     except Exception as exc:
